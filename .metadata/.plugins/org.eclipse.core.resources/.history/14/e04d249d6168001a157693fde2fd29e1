@@ -1,0 +1,73 @@
+package webdriverJava;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
+
+public class TesteLogin {
+	
+	private WebDriver driver;
+
+	@Before
+	public void SetUp () {
+		driver = GerenciandoChrome.AbrirPaginaInicial("http://advantageonlineshopping.com/#/");
+		//21:10
+	}
+	
+	@Test
+	public void TesteLoginSEMSucesso () {
+		String paginaInicial = new PaginaInicial(driver).PreencherLogin("victor", "1234").EsperarPorMensagemDeValidacao();
+		assertEquals("Incorrect user name or password.", paginaInicial);
+	}
+	
+	//@Test
+	public void PesquisaPelaLupaCOMSucesso () {
+		String pesquisa = new PaginaInicial(driver).PesquisaLupaMouse("Mouse").SelecionandoMouseEValidando();
+		assertEquals("HP USB 3 BUTTON OPTICAL MOUSE", pesquisa);
+	}
+	
+	//@Test
+	public void PesquisaPelaTelaInicialCOMSucesso () {
+		String pesquisa = new PaginaInicial(driver).PesquisaTelaInicialMouse().SelecionandoMouseEValidando();
+		assertEquals("HP USB 3 BUTTON OPTICAL MOUSE", pesquisa);
+	}
+	
+	//@Test
+	public void PreencherCadastroCOMSucesso () {
+		driver.findElement(By.id("menuUser")).click();
+		FluentWait wait = new FluentWait(driver);
+		wait.withTimeout(15000, TimeUnit.MILLISECONDS);
+		wait.pollingEvery(250, TimeUnit.MILLISECONDS);
+		wait.ignoring(NoSuchElementException.class);
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']"))));
+		driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']")).click();
+		driver.findElement(By.name("usernameRegisterPage")).sendKeys("Roger");
+		driver.findElement(By.name("passwordRegisterPage")).sendKeys("Abc4");
+		driver.findElement(By.name("confirm_passwordRegisterPage")).sendKeys("Abc4");
+		driver.findElement(By.name("emailRegisterPage")).sendKeys("roger@gmail.com");
+		driver.findElement(By.name("first_nameRegisterPage")).sendKeys("Roger");
+		driver.findElement(By.name("last_nameRegisterPage")).sendKeys("Fagundes Vasconcelos");
+		driver.findElement(By.name("phone_numberRegisterPage")).sendKeys("11987654321");
+		Select comboBox = new Select(driver.findElement(By.name("countryListboxRegisterPage")));
+		//wait.
+		//comboBox.selectByVisibleText("Brazil");
+	}
+	
+	//@After
+	public void tearDown () {
+		GerenciandoChrome.FecharChrome();
+	}
+	
+}

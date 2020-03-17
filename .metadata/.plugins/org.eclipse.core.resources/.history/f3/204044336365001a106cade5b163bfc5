@@ -1,0 +1,32 @@
+package webdriverJava;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TesteLogin {
+	
+	private WebDriver driver;
+
+	@Before
+	public void SetUp () {
+		System.setProperty("webdriver.chrome.driver", "C:/Users/victor.albano/eclipse-workspace/webdriverJava/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+	}
+	
+	@Test
+	public void TesteLoginComSucesso () {
+		driver.get("http://advantageonlineshopping.com/#/");
+		driver.findElement(By.id("menuUser")).click();
+		driver.findElement(By.name("username")).sendKeys("Victor.Fernandes");
+		driver.findElement(By.name("password")).sendKeys("senhaerrada/");
+		driver.findElement(By.id("sign_in_btnundefined")).click();
+		System.out.println(driver.findElement(By.xpath("//label[@id='signInResultMessage']")).getText());
+	}
+	
+}

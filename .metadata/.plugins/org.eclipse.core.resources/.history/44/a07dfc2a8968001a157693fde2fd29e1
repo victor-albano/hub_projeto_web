@@ -1,0 +1,64 @@
+package br.com.webdriverJava.pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class PaginaDeCadastro extends BasePage{
+
+	public PaginaDeCadastro(WebDriver driver) {
+		super(driver);
+	}
+	
+	public PaginaDeCadastro DigitarUserName (String username) {
+		driver.findElement(By.name("usernameRegisterPage")).sendKeys(username);
+		return this;
+	}
+	
+	public PaginaDeCadastro DigitarPasswordEConfirmacao (String password) {
+		driver.findElement(By.name("passwordRegisterPage")).sendKeys(password);
+		driver.findElement(By.name("confirm_passwordRegisterPage")).sendKeys(password);
+		return this;
+	}
+	
+	public PaginaDeCadastro DigitarEmail (String email) {
+		driver.findElement(By.name("emailRegisterPage")).sendKeys(email);
+		return this;
+	}
+	
+	public PaginaDeCadastro DigitarPrimeiroNome (String nome) {
+		driver.findElement(By.name("first_nameRegisterPage")).sendKeys(nome);
+		return this;
+	}
+	
+	public PaginaDeCadastro DigitarSobrenome (String sobrenome) {
+		driver.findElement(By.name("last_nameRegisterPage")).sendKeys("Fagundes Vasconcelos");
+		return this;
+	}
+	
+	public PaginaDeCadastro DigitarTelefone (String telefone) {
+		driver.findElement(By.name("phone_numberRegisterPage")).sendKeys("11987654321");
+		return this;
+	}
+	
+	public PaginaDeCadastro SelecionarComboBox (String pais) {
+		new Select(driver.findElement(By.name("countryListboxRegisterPage"))).selectByVisibleText(pais);
+		return this;
+	}
+	
+	public PaginaDeCadastro DigitarCidade (String cidade) {
+		driver.findElement(By.name("cityRegisterPage")).sendKeys(cidade);
+		return this;
+	}
+	
+	public PaginaDeCadastro DigitarEndereco (String endereco) {
+		driver.findElement(By.name("addressRegisterPage")).sendKeys(endereco);
+		return this;
+	}
+	
+	public PaginaDeCadastro DigitarEstado (String estado) {
+		driver.findElement(By.name("state_/_province_/_regionRegisterPage")).sendKeys(estado);
+		return this;
+	}
+
+}

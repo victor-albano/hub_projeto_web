@@ -1,0 +1,14 @@
+package webdriverJava;
+
+import org.openqa.selenium.WebDriver;
+
+public class PaginaPesquisaMouse {
+
+	private WebDriver driver;
+	
+	public PaginaPesquisaMouse (WebDriver driver) {
+		this.driver = driver;
+	}
+	
+	
+}

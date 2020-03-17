@@ -14,6 +14,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import br.com.webdriverJava.Suporte.GerenciandoChrome;
+import br.com.webdriverJava.pages.PaginaInicial;
 
 public class TesteLogin {
 	
@@ -24,20 +29,35 @@ public class TesteLogin {
 		driver = GerenciandoChrome.AbrirPaginaInicial("http://advantageonlineshopping.com/#/");
 	}
 	
-	@Test
-	public void TesteLoginSemSucesso () {
-		PaginaInicial paginaInicial = new PaginaInicial(driver);
-		paginaInicial.PreencherLogin("victor", "12345");
-		assertEquals("Incorrect user name or password.", paginaInicial.EsperarPorMensagemDeValidacao());
+	//@Test
+	public void TesteLoginSEMSucesso () {
+		String paginaInicial = new PaginaInicial(driver).PreencherLogin("victor", "1234").EsperarPorMensagemDeValidacao();
+		assertEquals("Incorrect user name or password.", paginaInicial);
 	}
 	
 	//@Test
-	public void PesquisaPelaLupa () {
-		driver.findElement(By.id("menuSearch")).click();
-		driver.findElement(By.id("autoComplete")).sendKeys("Mouse");
-		driver.findElement(By.id("autoComplete")).sendKeys(Keys.ENTER);
-		driver.findElement(By.xpath("//div[@class='autoCompleteCover']//div//img")).click();
-		driver.findElement(By.xpath("//a[contains(text(),'HP USB 3 Button Optical Mouse')]")).click();
+	public void PesquisaPelaLupaCOMSucesso () {
+		String pesquisa = new PaginaInicial(driver).PesquisaLupaMouse("Mouse").SelecionandoMouseEValidando();
+		assertEquals("HP USB 3 BUTTON OPTICAL MOUSE", pesquisa);
+	}
+	
+	//@Test
+	public void PesquisaPelaTelaInicialCOMSucesso () {
+		String pesquisa = new PaginaInicial(driver).PesquisaTelaInicialMouse().SelecionandoMouseEValidando();
+		assertEquals("HP USB 3 BUTTON OPTICAL MOUSE", pesquisa);
+	}
+	
+	@Test
+	public void PreencherCadastroCOMSucesso () throws InterruptedException {
+		new PaginaInicial(driver).ClicarJanelaDeLogin().ClicarCreateNewAccount()
+		.FazerCadastro("rodrigo", "Abc4", "rodrigo@gmail.com", "Rodrigo", "Morais",
+				"11990909898", "Brazil", "Santo André", "Rua natal", "SP", "09030000");
+		assertEquals("Rodrigo", new PaginaInicial(driver).ValidacaoLoginEfetuado());
+	}
+	
+	//@Test
+	public void LoginCOMSucesso () {
+		assertEquals("Roger", new PaginaInicial(driver).PreencherLogin("Roger", "Abc4").ValidacaoLoginEfetuado());
 	}
 	
 	//@After

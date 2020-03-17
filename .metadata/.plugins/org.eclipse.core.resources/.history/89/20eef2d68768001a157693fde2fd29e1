@@ -1,0 +1,13 @@
+package br.com.webdriverJava.pages;
+
+import org.openqa.selenium.WebDriver;
+
+public class PaginaDeCadastro extends BasePage{
+
+	public PaginaDeCadastro(WebDriver driver) {
+		super(driver);
+	}
+	
+	
+
+}

@@ -1,0 +1,5 @@
+package br.com.webdriverJava.pages;
+
+public class PaginaDeCadastro {
+
+}

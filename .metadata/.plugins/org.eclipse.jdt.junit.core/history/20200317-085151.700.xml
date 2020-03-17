@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TesteLogin" project="webdriverJava" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="webdriverJava.TesteLogin" time="33.683">
+    <testcase name="TesteLoginSemSucesso" classname="webdriverJava.TesteLogin" time="16.833"/>
+    <testcase name="PesquisaPelaLupa" classname="webdriverJava.TesteLogin" time="16.85"/>
+  </testsuite>
+</testrun>

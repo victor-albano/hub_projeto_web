@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TesteLogin" project="webdriverJava" tests="2" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="webdriverJava.TesteLogin" incomplete="true">
+    <testcase name="PreencherCadastroCOMSucesso" classname="webdriverJava.TesteLogin" incomplete="true"/>
+    <testcase name="PesquisaPelaTelaInicialCOMSucesso" classname="webdriverJava.TesteLogin" incomplete="true"/>
+  </testsuite>
+</testrun>
