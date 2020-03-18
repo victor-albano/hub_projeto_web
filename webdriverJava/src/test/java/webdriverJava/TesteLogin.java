@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import br.com.webdriverJava.Suporte.GerenciandoChrome;
+import br.com.webdriverJava.pages.PaginaDeCadastro;
 import br.com.webdriverJava.pages.PaginaInicial;
 
 public class TesteLogin {
@@ -30,39 +31,48 @@ public class TesteLogin {
 	}
 	
 	//@Test
-	public void TesteLoginSEMSucesso () {
-		String paginaInicial = new PaginaInicial(driver).PreencherLogin("victor", "1234").EsperarPorMensagemDeValidacao();
-		assertEquals("Incorrect user name or password.", paginaInicial);
-	}
-	
-	//@Test
-	public void PesquisaPelaLupaCOMSucesso () {
-		String pesquisa = new PaginaInicial(driver).PesquisaLupaMouse("Mouse").SelecionandoMouseEValidando();
-		assertEquals("HP USB 3 BUTTON OPTICAL MOUSE", pesquisa);
-	}
-	
-	//@Test
-	public void PesquisaPelaTelaInicialCOMSucesso () {
-		String pesquisa = new PaginaInicial(driver).PesquisaTelaInicialMouse().SelecionandoMouseEValidando();
-		assertEquals("HP USB 3 BUTTON OPTICAL MOUSE", pesquisa);
-	}
-	
-	@Test
-	public void PreencherCadastroCOMSucesso () throws InterruptedException {
-		new PaginaInicial(driver).ClicarJanelaDeLogin().ClicarCreateNewAccount()
-		.FazerCadastro("rodrigo", "Abc4", "rodrigo@gmail.com", "Rodrigo", "Morais",
-				"11990909898", "Brazil", "Santo André", "Rua natal", "SP", "09030000");
-		assertEquals("Rodrigo", new PaginaInicial(driver).ValidacaoLoginEfetuado());
-	}
-	
-	//@Test
 	public void LoginCOMSucesso () {
 		assertEquals("Roger", new PaginaInicial(driver).PreencherLogin("Roger", "Abc4").ValidacaoLoginEfetuado());
 	}
 	
-	//@After
+	//@Test
+	public void TesteLoginSEMSucesso () {
+		assertEquals("Incorrect user name or password.", new PaginaInicial(driver).PreencherLogin("victor", "1234").EsperarPorMensagemDeValidacao());
+	}
+	
+	@Test
+	public void PesquisaLupaCOMSucesso () {
+		assertEquals("HP USB 3 BUTTON OPTICAL MOUSE", new PaginaInicial(driver).PesquisaLupaMouse("Mouse").SelecionandoMouseEValidando());
+	}
+	
+	//@Test
+	public void PesquisaLupaSEMSucesso () {
+		assertEquals("No results for \"Produto\"", new PaginaInicial(driver).PesquisaLupaMouse("Produto").MensagemProdutoNaoEncontrado());
+	}
+	
+	//@Test
+	public void PesquisaPelaTelaInicialCOMSucesso () {
+		assertEquals("HP USB 3 BUTTON OPTICAL MOUSE", new PaginaInicial(driver).PesquisaTelaInicialMouse().SelecionandoMouseEValidando());
+	}
+	
+	//@Test
+	public void PreencherCadastroCOMSucesso () throws InterruptedException {
+		new PaginaInicial(driver).ClicarJanelaDeLogin().ClicarCreateNewAccount()
+		.FazerCadastro("Renan", "Abc4", "renan@gmail.com", "Renan", "Albano",
+				"11990909797", "Brazil", "Santo André", "Rua natal", "SP", "09030000");
+		assertEquals("Renan", new PaginaInicial(driver).ValidacaoLoginEfetuado());
+	}
+	
+	@Test
+	public void PreencherCadastroSEMSucesso () {
+		new PaginaInicial(driver).ClicarJanelaDeLogin().ClicarCreateNewAccount()
+		.FazerCadastroSemSucesso("rodrigo", "Abc4", "rodrigo1@gmail.com", "Rodrigo", "Morais",
+				"11990909898", "Brazil", "Santo André", "Rua natal", "SP", "09030000");
+		assertEquals("User name already exists", new PaginaDeCadastro(driver).MensagemCadastroSemSucesso());
+	}
+	
+	@After
 	public void tearDown () {
 		GerenciandoChrome.FecharChrome();
 	}
-	
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -17,9 +18,9 @@ public class PaginaInicial extends BasePage{
 	
 	public PaginaInicial PreencherLogin (String usuario , String senha) {
 		ClicarJanelaDeLogin();
-		driver.findElement(By.name("username")).sendKeys(usuario);
-		driver.findElement(By.name("password")).sendKeys(senha);
-		driver.findElement(By.id("sign_in_btnundefined")).click();
+		DigitarUsuario(usuario);
+		DigitarSenha(senha);
+		ClicarSignIn();
 		return this;
 	}
 	
@@ -34,28 +35,24 @@ public class PaginaInicial extends BasePage{
 	}
 	
 	public PaginaPesquisaMouse PesquisaLupaMouse (String mouse) {
-		driver.findElement(By.id("menuSearch")).click();
-		driver.findElement(By.id("autoComplete")).sendKeys(mouse);
-		driver.findElement(By.id("autoComplete")).sendKeys(Keys.ENTER);
-		driver.findElement(By.xpath("//div[@class='autoCompleteCover']//div//img")).click();
+		ClicarLupa();
+		DigitarPesquisa(mouse);
+		ClicarEnterNaPesquisa();
+		new PaginaPesquisaMouse(driver).ClicarNoProduto();
 		return new PaginaPesquisaMouse (driver);
 	}
+	
 
-	
-	
 	public PaginaPesquisaMouse PesquisaTelaInicialMouse () {
-		driver.findElement(By.id("miceTxt")).click();
+		ClicarNoIconeMouseTelaInicial();
 		return new PaginaPesquisaMouse(driver);
 	}
+	
 	
 	public String ValidacaoLoginEfetuado () {
 		return driver.findElement(By.xpath("//span[@class='hi-user containMiniTitle ng-binding']")).getText();
 	}
 	
-	public PaginaInicial ClicarJanelaDeLogin () {
-		driver.findElement(By.id("menuUser")).click();
-		return this;
-	}
 	
 	public PaginaDeCadastro ClicarCreateNewAccount () {
 		FluentWait wait = new FluentWait(driver);
@@ -63,7 +60,57 @@ public class PaginaInicial extends BasePage{
 		wait.pollingEvery(250, TimeUnit.MILLISECONDS);
 		wait.ignoring(NoSuchElementException.class);
 		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']"))));
-		driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']")).click();
+		ClicarBotaoCreateNewAccount();
 		return new PaginaDeCadastro (driver);
+	}
+	
+	
+	//Estrutural
+	
+	public PaginaInicial ClicarJanelaDeLogin () {
+		driver.findElement(By.id("menuUser")).click();
+		return this;
+	}
+	
+	public PaginaInicial DigitarUsuario (String usuario) {
+		driver.findElement(By.name("username")).sendKeys(usuario);
+		return this;
+	}
+	
+	public PaginaInicial DigitarSenha (String senha) {
+		driver.findElement(By.name("password")).sendKeys(senha);
+		return this;
+	}
+	
+	public PaginaInicial ClicarSignIn () {
+		driver.findElement(By.id("sign_in_btnundefined")).click();
+		return this;
+	}
+	
+	public PaginaInicial ClicarLupa () {
+		driver.findElement(By.id("menuSearch")).click();
+		return this;
+	}
+	
+	public PaginaInicial DigitarPesquisa (String mouse) {
+		driver.findElement(By.id("autoComplete")).sendKeys(mouse);
+		return this;
+	}
+	
+	public PaginaPesquisaMouse ClicarEnterNaPesquisa () {
+		driver.findElement(By.id("autoComplete")).sendKeys(Keys.ENTER);
+		return new PaginaPesquisaMouse(driver);
+	}
+	
+	public PaginaPesquisaMouse ClicarNoIconeMouseTelaInicial () {
+		driver.findElement(By.id("miceTxt")).click();
+		return new PaginaPesquisaMouse(driver);
+	}
+	
+	public PaginaDeCadastro ClicarBotaoCreateNewAccount () {
+		//driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']")).click();
+		Actions actions = new Actions(driver);
+		actions.click(driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']"))).perform();
+		return new PaginaDeCadastro(driver);
 	}
 }

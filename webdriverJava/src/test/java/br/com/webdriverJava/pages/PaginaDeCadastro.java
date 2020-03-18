@@ -1,7 +1,13 @@
 package br.com.webdriverJava.pages;
 
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 
 public class PaginaDeCadastro extends BasePage{
@@ -26,6 +32,24 @@ public class PaginaDeCadastro extends BasePage{
 		AceitarTermosDeUso();
 		ConfirmarCadastro();
 		return new PaginaInicial(driver);
+	}
+	
+	public PaginaDeCadastro FazerCadastroSemSucesso (String username, String password, String email, String nome, String sobrenome,
+			String telefone, String pais, String cidade, String endereco, String estado, String cep ) {
+		DigitarUserName(username);
+		DigitarPasswordEConfirmacao(password);
+		DigitarEmail(email);
+		DigitarPrimeiroNome(nome);
+		DigitarSobrenome(sobrenome);
+		DigitarTelefone(telefone);
+		SelecionarComboBox(pais);
+		DigitarCidade(cidade);
+		DigitarEndereco(endereco);
+		DigitarEstado(estado);
+		DigitarCep(cep);
+		AceitarTermosDeUso();
+		ConfirmarCadastro();
+		return this;
 	}
 	
 	public PaginaDeCadastro DigitarUserName (String username) {
@@ -92,6 +116,16 @@ public class PaginaDeCadastro extends BasePage{
 	public PaginaInicial ConfirmarCadastro () {
 		driver.findElement(By.id("register_btnundefined")).click();
 		return new PaginaInicial(driver);
+	}
+	
+	public String MensagemCadastroSemSucesso () {
+		FluentWait wait = new FluentWait(driver);
+		wait.withTimeout(15000, TimeUnit.MILLISECONDS);
+		wait.pollingEvery(50, TimeUnit.MILLISECONDS);
+		wait.ignoring(NoSuchElementException.class);
+		WebElement validacao = driver.findElement(By.xpath("/html/body/div[3]/section/article/sec-form/div[2]/label[1]"));
+		wait.until(ExpectedConditions.textToBePresentInElement(validacao, "User name already exists"));
+		return driver.findElement(By.xpath("/html/body/div[3]/section/article/sec-form/div[2]/label[1]")).getText();
 	}
 
 }
