@@ -1,21 +1,16 @@
 package webdriverJava;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import br.com.webdriverJava.Suporte.GerenciandoChrome;
 import br.com.webdriverJava.pages.PaginaDeCadastro;
@@ -30,12 +25,12 @@ public class TesteLogin {
 		driver = GerenciandoChrome.AbrirPaginaInicial("http://advantageonlineshopping.com/#/");
 	}
 	
-	//@Test
+	@Test
 	public void LoginCOMSucesso () {
 		assertEquals("Roger", new PaginaInicial(driver).PreencherLogin("Roger", "Abc4").ValidacaoLoginEfetuado());
 	}
 	
-	//@Test
+	@Test
 	public void TesteLoginSEMSucesso () {
 		assertEquals("Incorrect user name or password.", new PaginaInicial(driver).PreencherLogin("victor", "1234").EsperarPorMensagemDeValidacao());
 	}
@@ -45,22 +40,27 @@ public class TesteLogin {
 		assertEquals("HP USB 3 BUTTON OPTICAL MOUSE", new PaginaInicial(driver).PesquisaLupaMouse("Mouse").SelecionandoMouseEValidando());
 	}
 	
-	//@Test
+	@Test
 	public void PesquisaLupaSEMSucesso () {
 		assertEquals("No results for \"Produto\"", new PaginaInicial(driver).PesquisaLupaMouse("Produto").MensagemProdutoNaoEncontrado());
 	}
 	
-	//@Test
+	@Test
 	public void PesquisaPelaTelaInicialCOMSucesso () {
 		assertEquals("HP USB 3 BUTTON OPTICAL MOUSE", new PaginaInicial(driver).PesquisaTelaInicialMouse().SelecionandoMouseEValidando());
 	}
 	
-	//@Test
+	@Test
+	public void PesquisaPelaTelaInicialSEMSucesso () {
+		assertFalse(new PaginaInicial(driver).pesquisaListaTelaInicial(new PaginaInicial(driver).listaProdutosTelaInicial(), "TV"));
+	}
+	
+	@Test
 	public void PreencherCadastroCOMSucesso () throws InterruptedException {
 		new PaginaInicial(driver).ClicarJanelaDeLogin().ClicarCreateNewAccount()
-		.FazerCadastro("Renan", "Abc4", "renan@gmail.com", "Renan", "Albano",
-				"11990909797", "Brazil", "Santo André", "Rua natal", "SP", "09030000");
-		assertEquals("Renan", new PaginaInicial(driver).ValidacaoLoginEfetuado());
+		.FazerCadastro("Victor_v17", "Abc4", "victor.v17@gmail.com", "Victor", "Albano",
+				"11995654321", "Brazil", "Santo André", "Rua natal", "SP", "09030000");
+		assertEquals("Victor_v17", new PaginaInicial(driver).ValidacaoLoginEfetuado());
 	}
 	
 	@Test

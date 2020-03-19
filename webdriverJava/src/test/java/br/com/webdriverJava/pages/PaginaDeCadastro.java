@@ -16,6 +16,7 @@ public class PaginaDeCadastro extends BasePage{
 		super(driver);
 	}
 	
+	//Funcional
 	public PaginaInicial FazerCadastro (String username, String password, String email, String nome, String sobrenome,
 			String telefone, String pais, String cidade, String endereco, String estado, String cep ) {
 		DigitarUserName(username);
@@ -51,6 +52,8 @@ public class PaginaDeCadastro extends BasePage{
 		ConfirmarCadastro();
 		return this;
 	}
+	
+	//Estrutural
 	
 	public PaginaDeCadastro DigitarUserName (String username) {
 		driver.findElement(By.name("usernameRegisterPage")).sendKeys(username);

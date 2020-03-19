@@ -1,7 +1,9 @@
 package br.com.webdriverJava.pages;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -67,6 +69,21 @@ public class PaginaInicial extends BasePage{
 	
 	//Estrutural
 	
+	public boolean pesquisaListaTelaInicial (List<WebElement> listaProdutos, String nomeDoProduto) {
+		
+		for (WebElement webElement : listaProdutos) {
+			if (webElement.getText().contains(nomeDoProduto)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public List<WebElement> listaProdutosTelaInicial () {
+		List<WebElement> elements = driver.findElements(By.xpath("//span[@class='shop_now roboto-bold ng-binding']"));
+		return elements;
+	}
+	
 	public PaginaInicial ClicarJanelaDeLogin () {
 		driver.findElement(By.id("menuUser")).click();
 		return this;
@@ -108,9 +125,10 @@ public class PaginaInicial extends BasePage{
 	}
 	
 	public PaginaDeCadastro ClicarBotaoCreateNewAccount () {
-		//driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']")).click();
-		Actions actions = new Actions(driver);
-		actions.click(driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']"))).perform();
+		driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']")).click();
+		driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']")).click();
+//		Actions actions = new Actions(driver);
+//		actions.click(driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']"))).click().perform();
 		return new PaginaDeCadastro(driver);
 	}
 }

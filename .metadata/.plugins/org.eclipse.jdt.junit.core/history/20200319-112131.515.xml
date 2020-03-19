@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TesteLogin" project="webdriverJava" tests="7" started="7" failures="0" errors="0" ignored="0">
+  <testsuite name="webdriverJava.TesteLogin" time="121.593">
+    <testcase name="LoginCOMSucesso" classname="webdriverJava.TesteLogin" time="14.725"/>
+    <testcase name="PesquisaPelaTelaInicialSEMSucesso" classname="webdriverJava.TesteLogin" time="14.725"/>
+    <testcase name="PesquisaLupaCOMSucesso" classname="webdriverJava.TesteLogin" time="14.944"/>
+    <testcase name="TesteLoginSEMSucesso" classname="webdriverJava.TesteLogin" time="13.262"/>
+    <testcase name="PesquisaPelaTelaInicialCOMSucesso" classname="webdriverJava.TesteLogin" time="17.839"/>
+    <testcase name="PesquisaLupaSEMSucesso" classname="webdriverJava.TesteLogin" time="13.518"/>
+    <testcase name="PreencherCadastroSEMSucesso" classname="webdriverJava.TesteLogin" time="32.58"/>
+  </testsuite>
+</testrun>
