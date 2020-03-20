@@ -17,8 +17,10 @@
 <fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.support.ui.ExpectedConditions"/>
 <fullyQualifiedTypeName name="br.com.webdriverJava.pages.BasePage"/>
-<fullyQualifiedTypeName name="br.com.webdriverJava.pages.PaginaInicial"/>
 <fullyQualifiedTypeName name="br.com.webdriverJava.pages.PaginaPesquisaMouse"/>
 <fullyQualifiedTypeName name="br.com.webdriverJava.pages.PaginaDeCadastro"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.interactions.Actions"/>
+<fullyQualifiedTypeName name="org.junit.Test"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="br.com.webdriverJava.pages.PaginaInicial"/>
 </qualifiedTypeNameHistroy>
