@@ -12,16 +12,19 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
+import br.com.RsiHub3.ProjetoTDD.Excel.Constant;
+import br.com.RsiHub3.ProjetoTDD.Excel.ExcelUtils;
+
 public class PaginaInicial extends BasePage{
 
 	public PaginaInicial(WebDriver driver) {
 		super(driver);
 	}
 	
-	public PaginaInicial PreencherLogin (String usuario , String senha) {
+	public PaginaInicial PreencherLogin (int linha , int linhaSenha) throws Exception {
 		ClicarJanelaDeLogin();
-		DigitarUsuario(usuario);
-		DigitarSenha(senha);
+		pegarUsuarioExcel(linha);
+		pegarSenhaExcel(linhaSenha);
 		ClicarSignIn();
 		return this;
 	}
@@ -89,16 +92,6 @@ public class PaginaInicial extends BasePage{
 		return this;
 	}
 	
-	public PaginaInicial DigitarUsuario (String usuario) {
-		driver.findElement(By.name("username")).sendKeys(usuario);
-		return this;
-	}
-	
-	public PaginaInicial DigitarSenha (String senha) {
-		driver.findElement(By.name("password")).sendKeys(senha);
-		return this;
-	}
-	
 	public PaginaInicial ClicarSignIn () {
 		driver.findElement(By.id("sign_in_btnundefined")).click();
 		return this;
@@ -130,5 +123,18 @@ public class PaginaInicial extends BasePage{
 //		Actions actions = new Actions(driver);
 //		actions.click(driver.findElement(By.xpath("//a[@class='create-new-account ng-scope']"))).click().perform();
 		return new PaginaDeCadastro(driver);
+	}
+	
+	public PaginaInicial pegarUsuarioExcel (int linha) throws Exception {
+		ExcelUtils.setExcelFile(Constant.Path_TestData + Constant.File_TestData , "Planilha1");
+		//ExcelUtils.getCellData(linha, 0);
+		driver.findElement(By.name("username")).sendKeys(ExcelUtils.getCellData(linha, 0));
+		return this;
+	}
+	
+	public PaginaInicial pegarSenhaExcel (int linhaSenha ) throws Exception {
+		ExcelUtils.setExcelFile(Constant.Path_TestData + Constant.File_TestData , "Planilha1");
+		driver.findElement(By.name("password")).sendKeys(ExcelUtils.getCellData(linhaSenha, 1));
+		return this;
 	}
 }

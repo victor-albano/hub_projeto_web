@@ -26,13 +26,13 @@ public class Testes {
 	}
 	
 	@Test
-	public void LoginCOMSucesso () {
-		assertEquals("Roger", new PaginaInicial(driver).PreencherLogin("Roger", "Abc4").ValidacaoLoginEfetuado());
+	public void LoginCOMSucesso () throws Exception {
+		assertEquals("Roger", new PaginaInicial(driver).PreencherLogin(1, 1).ValidacaoLoginEfetuado());
 	}
 	
 	@Test
-	public void TesteLoginSEMSucesso () {
-		assertEquals("Incorrect user name or password.", new PaginaInicial(driver).PreencherLogin("victor", "1234").EsperarPorMensagemDeValidacao());
+	public void TesteLoginSEMSucesso () throws Exception {
+		assertEquals("Incorrect user name or password.", new PaginaInicial(driver).PreencherLogin(2, 2).EsperarPorMensagemDeValidacao());
 	}
 	
 	@Test
